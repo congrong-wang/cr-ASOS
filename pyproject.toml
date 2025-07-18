@@ -1,0 +1,17 @@
+[project]
+name = "cr-asos"
+version = "0.0.0.1"
+description = "Utilities for reading, analyzing and plotting ASOS data"
+# readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Congrong Wang", email = "ASOS@congrong.wang" }]
+
+dependencies = [
+    "cmocean",
+    "cr_smps",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "Requests",
+]
