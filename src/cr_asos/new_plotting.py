@@ -1,9 +1,11 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import cmocean
 import matplotlib
+import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
-import cmocean
+import os
+import pandas as pd
+
 from cr_smps.analysis import _plot_heatmap
 
 
@@ -41,11 +43,10 @@ def _smooth_wind_direction(
     return smoothed_deg
 
 
-def new_daily_plot_w_SMPS(dt, dt_smps, plot_date):
+def new_daily_plot_w_SMPS(dt, dt_smps, plot_date, output_dir="./plots/"):
     # Create 5 axis for the daily plot
     matplotlib.rcParams["axes.unicode_minus"] = False  # Prevent minus sign from showing
     fig, axs = plt.subplots(5, 1, figsize=(12, 12), sharex=True)
-    fig.suptitle(f"PABI Daily Weather Data - {plot_date}", fontsize=16)
 
     date_mask = dt.index.date == pd.to_datetime(plot_date).date()
     daily_data = dt[date_mask].copy()
@@ -118,7 +119,7 @@ def new_daily_plot_w_SMPS(dt, dt_smps, plot_date):
     axs[3].set_position([pos4.x0, y_top - 4 * subplot_h, pos4.width, subplot_h])
     axs[4].set_position([pos5.x0, y_top - 5 * subplot_h, pos5.width, subplot_h])
 
-    plt.suptitle(f"PABI Weather Data - {plot_date} (Mixed Resolution)", fontsize=16)
+    plt.suptitle(f"SMPS Heatmap with PABI Weather Data - {plot_date}", fontsize=16)
 
     # 底部区域
     bottom_height = 0.18  # More space for bottom area
@@ -136,15 +137,20 @@ def new_daily_plot_w_SMPS(dt, dt_smps, plot_date):
     )  # Adjusted positioning for 1:1 ratio
     _plot_wind_rose(legend_ax_center, wind_data)
 
-    # save whole plot for debugging
-    plt.savefig(f"PABI_daily_{plot_date}_new.png", dpi=300, bbox_inches="tight")
+    # Save the figure
+    fname = f"PABI_daily_{plot_date}_new.png"
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        save_path = os.path.join(output_dir, fname)
+    else:
+        save_path = fname
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
 
 
 def new_daily_plot(dt, plot_date):
     # Create 4 axis for the daily plot
     matplotlib.rcParams["axes.unicode_minus"] = False  # Prevent minus sign from showing
     fig, axs = plt.subplots(4, 1, figsize=(12, 24), sharex=True)
-    fig.suptitle(f"PABI Daily Weather Data - {plot_date}", fontsize=16)
 
     date_mask = dt.index.date == pd.to_datetime(plot_date).date()
     daily_data = dt[date_mask].copy()
@@ -210,7 +216,7 @@ def new_daily_plot(dt, plot_date):
     axs[2].set_position([pos3.x0, y_top - 3 * subplot_h, pos3.width, subplot_h])
     axs[3].set_position([pos4.x0, y_top - 4 * subplot_h, pos4.width, subplot_h])
 
-    plt.suptitle(f"PABI Weather Data - {plot_date} (Mixed Resolution)", fontsize=16)
+    plt.suptitle(f"PABI Weather Data - {plot_date}", fontsize=16)
 
     # 底部区域
     bottom_height = 0.18  # More space for bottom area
