@@ -61,7 +61,7 @@ def new_daily_plot_w_SMPS(
         ax=axs[0],
         dataset=dt_smps,
         time_range=plot_date,
-        timezone=SMPS_plotting_timezone,
+        output_time_zone=SMPS_plotting_timezone,
     )
     temp_data = daily_data["temp_c"].copy()
     _plot_temperature(axs[1], temp_data)
