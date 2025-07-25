@@ -49,6 +49,7 @@ def new_daily_plot_w_SMPS(
     plot_date,
     output_dir="./plots/",
     SMPS_plotting_timezone=None,
+    dt_precip=None,
 ):
     # Create 5 axis for the daily plot
     matplotlib.rcParams["axes.unicode_minus"] = False  # Prevent minus sign from showing
@@ -68,12 +69,19 @@ def new_daily_plot_w_SMPS(
         time_range=plot_date,
         output_time_zone=SMPS_plotting_timezone,
     )
+
     temp_data = daily_data["temp_c"].copy()
     _plot_temperature(axs[1], temp_data)
+
     rh_data = daily_data["rh"].copy()
     _plot_humidity(axs[2], rh_data)
-    precip_data = daily_data["precip_mm"].copy()
+
+    if dt_precip is not None:
+        precip_data = dt_precip[date_mask]["precip_mm"].copy()
+    else:
+        precip_data = daily_data["precip_mm"].copy()
     _plot_precipitation(axs[3], precip_data)
+
     wind_data = daily_data[["sknt_ms", "drct"]].copy()
     _plot_wind(axs[4], wind_data)
 
