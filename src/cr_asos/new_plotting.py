@@ -43,7 +43,13 @@ def _smooth_wind_direction(
     return smoothed_deg
 
 
-def new_daily_plot_w_SMPS(dt, dt_smps, plot_date, output_dir="./plots/"):
+def new_daily_plot_w_SMPS(
+    dt,
+    dt_smps,
+    plot_date,
+    output_dir="./plots/",
+    SMPS_plotting_timezone=None,
+):
     # Create 5 axis for the daily plot
     matplotlib.rcParams["axes.unicode_minus"] = False  # Prevent minus sign from showing
     fig, axs = plt.subplots(5, 1, figsize=(12, 12), sharex=True)
@@ -55,6 +61,7 @@ def new_daily_plot_w_SMPS(dt, dt_smps, plot_date, output_dir="./plots/"):
         ax=axs[0],
         dataset=dt_smps,
         time_range=plot_date,
+        timezone=SMPS_plotting_timezone,
     )
     temp_data = daily_data["temp_c"].copy()
     _plot_temperature(axs[1], temp_data)
