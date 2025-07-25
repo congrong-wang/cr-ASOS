@@ -1,6 +1,6 @@
 [project]
 name = "cr-asos"
-version = "0.0.0.7"
+version = "0.0.0.8"
 description = "Utilities for reading, analyzing and plotting ASOS data"
 # readme = "README.md"
 requires-python = ">=3.11"

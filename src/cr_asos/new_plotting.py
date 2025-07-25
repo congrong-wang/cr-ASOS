@@ -77,7 +77,8 @@ def new_daily_plot_w_SMPS(
     _plot_humidity(axs[2], rh_data)
 
     if dt_precip is not None:
-        precip_data = dt_precip["precip_mm"].copy()
+        precip_date_mask = dt_precip.index.date == pd.to_datetime(plot_date).date()
+        precip_data = dt_precip[precip_date_mask]["precip_mm"].copy()
     else:
         precip_data = daily_data["precip_mm"].copy()
     _plot_precipitation(axs[3], precip_data)
