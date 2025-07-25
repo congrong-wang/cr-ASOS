@@ -52,7 +52,12 @@ def new_daily_plot_w_SMPS(
 ):
     # Create 5 axis for the daily plot
     matplotlib.rcParams["axes.unicode_minus"] = False  # Prevent minus sign from showing
-    fig, axs = plt.subplots(5, 1, figsize=(12, 12), sharex=True)
+    fig, axs = plt.subplots(
+        5,
+        1,
+        figsize=(12, 12),
+        # sharex=True,
+    )
 
     date_mask = dt.index.date == pd.to_datetime(plot_date).date()
     daily_data = dt[date_mask].copy()
