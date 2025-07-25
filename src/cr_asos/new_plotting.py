@@ -82,7 +82,8 @@ def new_daily_plot_w_SMPS(
 
     # 为所有子图设置相同的x轴格式
     for ax in axs:
-        ax.set_xlim(start_of_day, end_of_day)
+        if ax != axs[0]:
+            ax.set_xlim(start_of_day, end_of_day)
         ax.xaxis.set_major_locator(mdates.HourLocator(interval=1))
         ax.grid(True, alpha=0.3, which="major", axis="x", linestyle="--")
 
@@ -96,7 +97,7 @@ def new_daily_plot_w_SMPS(
 
     # 在最上面的子图的上方添加x轴标签
     ax1_top = axs[0].twiny()
-    ax1_top.set_xlim(start_of_day, end_of_day)
+    # ax1_top.set_xlim(start_of_day, end_of_day)
     ax1_top.xaxis.set_major_locator(mdates.HourLocator(interval=1))
     ax1_top.xaxis.set_major_formatter(mdates.DateFormatter("%H"))
     ax1_top.tick_params(axis="x", rotation=0, labelsize=10)
