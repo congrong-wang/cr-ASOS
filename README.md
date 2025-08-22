@@ -1,4 +1,4 @@
-# Installation
+## Installation
 
 Run
 
@@ -8,9 +8,9 @@ pip install git+https://github.com/congrong-wang/cr-ASOS.git
 
 
 
-# Functions
+## Functions
 
-## Download data
+### Download data
 
 There are three types of data for download:
 
@@ -32,7 +32,7 @@ These functions are documented with docstring. Call `help(function_name)` to rea
 
 
 
-## Read downloaded files
+### Read downloaded files
 
 There are also three functions to read downloaded CSV files:
 
@@ -48,7 +48,7 @@ These functions are also documented.
 
 
 
-## Plot
+### Plot
 
 There is currently only one plotting function:
 
@@ -56,4 +56,4 @@ There is currently only one plotting function:
 from cr_asos.plotting import daily_plot_w_SMPS
 ```
 
-![](/home/wcr/ASOS3.11.12/assets/PABI_daily_w_SMPS_2025-06-25.png)
+![](assets/PABI_daily_w_SMPS_2025-06-25.png)
