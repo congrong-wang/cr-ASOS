@@ -1,15 +1,10 @@
-# Ignore all
+# First, Ignore all
 *
-
-# Keep project-related files
+# But keep project-related files
 !src/
 !src/**
 !README.md
 !pyproject.toml
-
-# Ignore old files
-# src/cr_smps/code_steven.py
-# src/cr_smps/cr-smps.py
 
 # Ignore Python cache and build artifacts
 *.egg-info/
@@ -27,6 +22,9 @@ __pycache__/
 *.jpg
 *.jpeg
 *.joblib
+# But keep the assets
+!assets/
+!assets/**
 
 # Ignore hidden files and directories
 .*

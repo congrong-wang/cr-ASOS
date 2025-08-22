@@ -5,11 +5,13 @@ from datetime import datetime, timedelta
 def parse_time_input(time_input):
     """
     Parse the time input for downloading ASOS data.
+
     Args:
-        time_input: Either a single date string (e.g., "2025-6-25") for single day,
-                    or a list/tuple of two date strings (e.g., ["2025-6-1", "2025-6-30"]) for date range
+        time_input: Either a single date string (e.g., "2025-6-25") for
+            single day, or a list/tuple of two date strings (e.g.,
+            ["2025-6-1", "2025-6-30"]) for date range
     """
-    # 如果是列表或元组, 且长度为2, 则表示日期范围
+    # If it's a list or tuple with length 2, it's a date range
     if isinstance(time_input, (list, tuple)) and len(time_input) == 2:
         # Date range
         start_date = datetime.strptime(time_input[0], "%Y-%m-%d")
@@ -17,7 +19,7 @@ def parse_time_input(time_input):
             days=1
         )  # Next day 00:00:00
         filename_suffix = f"{start_date.strftime('%Y-%m-%d')}_{(end_date - timedelta(days=1)).strftime('%Y-%m-%d')}"
-    # 如果是字符串, 则表示单个日期
+    # If it's a string, it's a single date
     else:
         # Single date
         if isinstance(time_input, str):
@@ -38,9 +40,17 @@ def download_asos_1min_data(time, station="PABI", timezone="America/Anchorage"):
     Download ASOS 1-minute data for PABI station.
     Website: https://mesonet.agron.iastate.edu/request/asos/1min.phtml
 
+    Downloaded data will be saved to a CSV file.
+    Filename format: {station}_ASOS_1min_{YYYY-MM-DD}_{YYYY-MM-DD}.csv
+        or {station}_ASOS_1min_{YYYY-MM-DD}.csv
+    Unfortunately, output folder is the current working directory and
+        cannot be changed. Try changing the working directory before
+        running the script.
+
     Args:
-        time: Either a single date string (e.g., "2025-6-25") for single day,
-              or a list/tuple of two date strings (e.g., ["2025-6-1", "2025-6-30"]) for date range
+        time: Either a single date string (e.g., "2025-6-25") for single
+            day, or a list/tuple of two date strings (e.g., ["2025-6-1",
+            "2025-6-30"]) for date range
         station: Station code (default: "PABI")
         timezone: Timezone (default: "America/Anchorage")
     """
@@ -103,9 +113,17 @@ def download_asos_5min_data(
     Download ASOS 5-minute data for PABI station.
     Website: https://mesonet.agron.iastate.edu/request/download.phtml
 
+    Downloaded data will be saved to a CSV file.
+    Filename format: {station}_ASOS_5min_{YYYY-MM-DD}_{YYYY-MM-DD}.csv
+        or {station}_ASOS_5min_{YYYY-MM-DD}.csv
+    Unfortunately, output folder is the current working directory and
+        cannot be changed. Try changing the working directory before
+        running the script.
+
     Args:
-        time: Either a single date string (e.g., "2025-6-25") for single day,
-              or a list/tuple of two date strings (e.g., ["2025-6-1", "2025-6-30"]) for date range
+        time: Either a single date string (e.g., "2025-6-25") for single
+            day, or a list/tuple of two date strings (e.g., ["2025-6-1",
+            "2025-6-30"]) for date range
         station: Station code (default: "PABI")
         timezone: Timezone (default: "America/Anchorage")
     """
@@ -144,16 +162,24 @@ def download_asos_5min_data(
     print(f"Download successful: {filename}")
 
 
-def download_hourly_precip_data(
+def download_asos_hourly_precip_data(
     time, network="AK_ASOS", station="PABI", timezone="America/Anchorage"
 ):
     """
-    Download hourly precipitation data for specific station(s).
+    Download ASOS hourly precipitation data for PABI station.
     Website: https://mesonet.agron.iastate.edu/request/asos/hourlyprecip.phtml
 
+    Downloaded data will be saved to a CSV file.
+    Filename format: {station}_ASOS_1h_precip_{YYYY-MM-DD}_{YYYY-MM-DD}.csv
+        or {station}_ASOS_1h_precip_{YYYY-MM-DD}.csv
+    Unfortunately, output folder is the current working directory and
+        cannot be changed. Try changing the working directory before
+        running the script.
+
     Args:
-        time: Either a single date string (e.g., "2025-6-25") for single day,
-              or a list/tuple of two date strings (e.g., ["2025-6-1", "2025-6-30"]) for date range
+        time: Either a single date string (e.g., "2025-6-25") for single
+            day, or a list/tuple of two date strings (e.g., ["2025-6-1",
+            "2025-6-30"]) for date range
         network: Network name (default: "AK_ASOS")
         station: Station code (default: "PABI")
         timezone: Timezone (default: "America/Anchorage")

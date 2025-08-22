@@ -8,10 +8,10 @@ def read_asos_1min_csv(file_path):
     Reads an ASOS CSV file and returns a DataFrame.
 
     Parameters:
-    file_path (str): Path to the ASOS CSV file.
+        file_path (str): Path to the ASOS CSV file.
 
     Returns:
-    pd.DataFrame: DataFrame containing the ASOS data.
+        pd.DataFrame: DataFrame containing the ASOS data.
     """
 
     # Read pabi1min.csv file
@@ -63,10 +63,10 @@ def read_asos_5min_csv(file_path):
     Reads an ASOS CSV file and returns a DataFrame.
 
     Parameters:
-    file_path (str): Path to the ASOS CSV file.
+        file_path (str): Path to the ASOS CSV file.
 
     Returns:
-    pd.DataFrame: DataFrame containing the ASOS data.
+        pd.DataFrame: DataFrame containing the ASOS data.
     """
 
     # Read pabi1min.csv file
@@ -124,7 +124,16 @@ def read_asos_5min_csv(file_path):
     return df
 
 
-def read_asos_1h_precip_csv(file_path):
+def read_asos_hourly_precip_csv(file_path):
+    """
+    Reads an ASOS hourly precipitation CSV file and returns a DataFrame.
+
+    Parameters:
+        file_path (str): Path to the ASOS CSV file.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the ASOS data.
+    """
     df = pd.read_csv(
         file_path,
         parse_dates=["valid"],
